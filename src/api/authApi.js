@@ -102,8 +102,9 @@ export const logout = () => {
 
 // Checks if current session is valid.
 export const isCurrentSessionValid = async () => {
-    if (!store.getState().currentSession.isLoggedIn) return false
-    if (!USE_SESSION_STORAGE) return true
+    if (!USE_SESSION_STORAGE) {
+        return store.getState().currentSession.isLoggedIn
+    }
 
     const localAuthKey = window.sessionStorage.getItem("userAuthKey")
     const serverAuthKey = store.getState().currentSession.authKey
